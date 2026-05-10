@@ -728,22 +728,22 @@
 
     .mobile-nav-cta { width: 100%; justify-content: center; }
 
-    /* Sticky bottom book bar (mobile only) */
+    /* Floating book pill (mobile only) */
     .book-bar {
       display: none;
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
-      background: rgba(8,8,9,0.96);
-      backdrop-filter: blur(16px) saturate(1.5);
-      -webkit-backdrop-filter: blur(16px) saturate(1.5);
-      border-top: 1px solid var(--line);
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 80;
+      white-space: nowrap;
     }
 
-    .book-bar .btn-primary { width: 100%; justify-content: center; padding: 14px; }
+    .book-bar .btn-primary {
+      padding: 14px 30px;
+      font-size: 14px;
+      box-shadow: 0 8px 36px rgba(200,169,110,0.32), 0 3px 12px rgba(0,0,0,0.55);
+    }
 
     /* Responsive */
     @media (max-width: 1080px) {
@@ -807,6 +807,66 @@
       .proof-item strong { font-size: 22px; margin-bottom: 0; }
     }
 
+    /* ── Animations ───────────────────────────────────── */
+
+    /* Page entrance */
+    @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
+    body { animation: pageFade 0.45s ease both; }
+
+    /* Floating book button entrance */
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .book-bar { animation: floatUp 0.5s var(--ease) 0.4s both; }
+
+    /* Button ripple */
+    .btn-ghost { position: relative; overflow: hidden; }
+    .ripple {
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      transform: scale(0);
+      background: rgba(255,255,255,0.2);
+      animation: ripple-out 0.55s ease-out forwards;
+    }
+    .btn-primary .ripple { background: rgba(0,0,0,0.12); }
+    @keyframes ripple-out { to { transform: scale(4); opacity: 0; } }
+
+    /* Badge dot heartbeat */
+    @keyframes dot-pulse {
+      0%, 100% { box-shadow: 0 0 6px rgba(200,169,110,0.4); }
+      50%       { box-shadow: 0 0 6px rgba(200,169,110,0.4), 0 0 0 5px rgba(200,169,110,0); }
+    }
+    .badge::before { animation: dot-pulse 3s ease-in-out infinite; }
+
+    /* Nav link underline slide */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s var(--ease);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Card tap feedback */
+    .service-card:active { transform: translateY(0) scale(0.98) !important; transition-duration: 0.08s !important; }
+    .process-card:active,
+    .testimonial-card:active,
+    .feature-card:active   { transform: scale(0.99) !important; transition-duration: 0.08s !important; }
+    .booking-card { transition: box-shadow 0.3s var(--ease); }
+
+    /* Gold rule shimmer */
+    .gold-rule { position: relative; }
+
+    /* ── Address autocomplete ───────────────────────── */
     /* Address autocomplete */
     .form-group { position: relative; }
 
@@ -1270,6 +1330,10 @@
         `\n${rule}`
       );
 
+      const submitBtn = e.target.querySelector('[type="submit"]');
+      submitBtn.textContent = 'Opening email…';
+      submitBtn.disabled = true;
+
       window.location.href = `mailto:hello@chauffeu.rs?subject=${subject}&body=${body}`;
 
       document.querySelector('.booking-card').innerHTML = `
@@ -1282,13 +1346,31 @@
       `;
     });
 
-    // Scroll reveal
+    // Button ripple — delegated to document so it catches dynamic buttons too
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.btn-primary, .btn-ghost');
+      if (!btn) return;
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px`;
+      btn.appendChild(r);
+      r.addEventListener('animationend', () => r.remove());
+    });
+
+    // Scroll reveal with staggered delays inside grids
     const io = new IntersectionObserver(
       entries => entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       }),
-      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0.06, rootMargin: '0px 0px -24px 0px' }
     );
+    document.querySelectorAll('.services-grid, .process-grid, .testimonials-grid').forEach(grid => {
+      grid.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.07}s`;
+      });
+    });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
     // Address autocomplete via OpenStreetMap Nominatim (free, no key required)
