@@ -3,604 +3,1281 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@chauffeurs</title>
-  <meta name="description" content="Private chauffeur referrals for airport runs, executive travel, nights out, and special occasions." />
-  <meta name="theme-color" content="#0b0b0c" />
+  <title>@chauffeurs — Private Chauffeur Referrals</title>
+  <meta name="description" content="Private chauffeur referrals for airport transfers, executive travel, evenings out, and special occasions." />
+  <meta name="theme-color" content="#080809" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="@chauffeurs" />
-  <meta property="og:description" content="Private chauffeur referrals for airport runs, executive travel, nights out, and special occasions." />
-<meta property="og:image" content="https://chauffeu.rs/chauffeurs-thumbnail.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="@chauffeurs preview card for private chauffeur referrals" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="@chauffeurs | Private Chauffeur Referrals" />
-<meta name="twitter:description" content="Private chauffeur referrals for airport runs, executive travel, nights out, and special occasions." />
-<meta name="twitter:image" content="https://chauffeu.rs/chauffeurs-thumbnail.png" />
+  <meta property="og:description" content="Private chauffeur referrals for airport transfers, executive travel, evenings out, and special occasions." />
+  <meta property="og:image" content="https://chauffeu.rs/chauffeurs-thumbnail.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="@chauffeurs — Private chauffeur referrals" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="@chauffeurs | Private Chauffeur Referrals" />
+  <meta name="twitter:description" content="Private chauffeur referrals for airport transfers, executive travel, evenings out, and special occasions." />
+  <meta name="twitter:image" content="https://chauffeu.rs/chauffeurs-thumbnail.png" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0b0b0c;
-      --panel: #141416;
-      --panel-2: #1b1b1e;
-      --text: #f5f5f2;
-      --muted: #b3b3ad;
-      --line: rgba(255,255,255,0.08);
-      --accent: #d5b36a;
-      --accent-soft: rgba(213, 179, 106, 0.12);
-      --max: 1180px;
-      --radius: 22px;
-      --shadow: 0 18px 60px rgba(0,0,0,0.35);
+      --bg: #080809;
+      --surface: #0f0f11;
+      --surface-2: #141417;
+      --surface-3: #1a1a1e;
+      --text: #edeae2;
+      --muted: #78756f;
+      --line: rgba(255,255,255,0.07);
+      --gold: #c8a96e;
+      --gold-bright: #d4b978;
+      --gold-soft: rgba(200,169,110,0.10);
+      --gold-glow: rgba(200,169,110,0.22);
+      --max: 1200px;
+      --radius: 20px;
+      --shadow: 0 32px 80px rgba(0,0,0,0.55);
+      --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(213,179,106,0.14), transparent 28%),
-        linear-gradient(180deg, #0a0a0b 0%, #111113 100%);
+      font-family: var(--font-sans);
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -10%;
+      right: -10%;
+      width: 55%;
+      height: 65%;
+      background: radial-gradient(ellipse, rgba(200,169,110,0.055) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
-    .container { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .pill::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-soft);
+
+    .container {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
+    /* Typography */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    h1 { font-size: clamp(50px, 7vw, 82px); letter-spacing: -0.01em; }
+    h2 { font-size: clamp(34px, 4.5vw, 54px); letter-spacing: -0.01em; }
+    h3 { font-size: clamp(20px, 2.5vw, 26px); }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 13px 5px 10px;
+      border: 1px solid rgba(200,169,110,0.22);
+      border-radius: 999px;
+      background: rgba(200,169,110,0.06);
+      color: var(--gold);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold-glow);
+      flex-shrink: 0;
+    }
+
+    /* Gold rule */
+    .gold-rule {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(200,169,110,0.18), transparent);
+    }
+
+    /* Header */
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: rgba(10,10,11,0.78);
+      z-index: 100;
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      background: rgba(8,8,9,0.88);
       border-bottom: 1px solid var(--line);
     }
+
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 76px;
-      gap: 20px;
+      gap: 24px;
+      height: 70px;
     }
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      gap: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
+
     .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
       display: grid;
       place-items: center;
-      background: linear-gradient(145deg, #1f1f22, #101012);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--accent);
-      font-size: 18px;
+      background: linear-gradient(135deg, var(--surface-3), var(--surface));
+      border: 1px solid rgba(200,169,110,0.18);
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 600;
     }
+
     .nav-links {
       display: flex;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 14px;
+      gap: 30px;
+      list-style: none;
     }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      transition: color 0.2s var(--ease);
+    }
+
     .nav-links a:hover { color: var(--text); }
-    .cta, .cta-secondary {
+
+    /* Buttons */
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 14px 20px;
+      gap: 8px;
+      padding: 12px 26px;
+      background: var(--gold);
+      color: #09090a;
       border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 13px;
       font-weight: 600;
-      transition: 0.2s ease;
-    }
-    .cta {
-      background: var(--accent);
-      color: #101010;
-      box-shadow: 0 14px 40px rgba(213,179,106,0.25);
-    }
-    .cta:hover { transform: translateY(-1px); }
-    .cta-secondary {
-      border: 1px solid var(--line);
-      color: var(--text);
-      background: rgba(255,255,255,0.03);
+      letter-spacing: 0.05em;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
     }
 
-    .hero {
-      padding: 86px 0 54px;
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+      transform: translateX(-120%);
+      transition: transform 0.55s ease;
     }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 36px rgba(200,169,110,0.32);
+    }
+
+    .btn-primary:hover::after { transform: translateX(120%); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(200,169,110,0.28);
+      color: var(--gold);
+    }
+
+    /* Hero */
+    .hero { padding: 80px 0 64px; }
+
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 28px;
-      align-items: stretch;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
     }
-    .hero-copy,
-    .hero-card,
-    .section-card,
-    .service-card,
-    .testimonial,
-    .process-card,
-    .contact-card {
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
+
+    .hero-copy { padding-top: 8px; }
+
+    .hero-headline {
+      margin: 20px 0 18px;
+      line-height: 0.95;
     }
-    .hero-copy {
-      padding: 34px;
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
     }
-    h1 {
-      margin: 18px 0 18px;
-      font-size: clamp(40px, 7vw, 72px);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 10ch;
-    }
-    .lead {
-      max-width: 60ch;
+
+    .hero-lead {
+      font-size: 16px;
       color: var(--muted);
-      font-size: 17px;
+      max-width: 50ch;
+      line-height: 1.75;
     }
+
     .hero-actions {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 28px;
+      margin-top: 30px;
     }
-    .hero-stats {
+
+    .hero-proof {
+      display: flex;
+      gap: 36px;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .proof-item strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .proof-item span { font-size: 13px; color: var(--muted); }
+
+    /* Booking card */
+    .booking-card {
+      background: linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 100%);
+      border: 1px solid rgba(200,169,110,0.14);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .booking-card-header { margin-bottom: 20px; }
+    .booking-card-header h3 { margin: 10px 0 5px; font-size: 24px; }
+    .booking-card-header p { font-size: 13px; color: var(--muted); }
+
+    .form-group { margin-bottom: 13px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 10px 13px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      color: var(--text);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+      color-scheme: dark;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%2378756f' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 34px;
+      cursor: pointer;
+    }
+
+    .form-group select option { background: #1a1a1e; }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #40403d; }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(200,169,110,0.38);
+      background: rgba(200,169,110,0.04);
+    }
+
+    .form-group textarea { resize: none; min-height: 64px; line-height: 1.5; }
+
+    .booking-submit { margin-top: 4px; }
+    .booking-submit .btn-primary { width: 100%; padding: 13px; font-size: 13px; }
+
+    .booking-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 9px;
+    }
+
+    .booking-success {
+      text-align: center;
+      padding: 36px 16px;
+    }
+
+    .success-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(200,169,110,0.28);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      color: var(--gold);
+      font-size: 22px;
+    }
+
+    .booking-success h3 { font-size: 22px; margin-bottom: 9px; }
+    .booking-success p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* Sections */
+    .section { padding: 64px 0; }
+
+    .section-header { margin-bottom: 36px; }
+    .section-header h2 { margin-top: 12px; }
+    .section-header .subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 50ch;
+      margin-top: 11px;
+      line-height: 1.75;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .service-card {
+      background: linear-gradient(160deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .service-card:hover {
+      border-color: rgba(200,169,110,0.18);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--gold-soft);
+      border: 1px solid rgba(200,169,110,0.18);
+      margin-bottom: 18px;
+      color: var(--gold);
+    }
+
+    .service-card h3 { font-size: 19px; margin-bottom: 9px; }
+    .service-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* Process */
+    .process-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 34px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
+      gap: 14px;
     }
-    .stat strong {
-      display: block;
-      font-size: 28px;
-      letter-spacing: -0.04em;
+
+    .process-card {
+      background: linear-gradient(160deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      transition: border-color 0.25s var(--ease);
     }
-    .stat span {
+
+    .process-card:hover { border-color: rgba(200,169,110,0.18); }
+
+    .process-num {
+      font-family: var(--font-display);
+      font-size: 68px;
+      font-weight: 600;
+      color: rgba(200,169,110,0.1);
+      line-height: 1;
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .process-card h3 { margin-bottom: 9px; }
+    .process-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+    }
+
+    .about-main {
+      background: linear-gradient(145deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 38px;
+    }
+
+    .about-main h2 { margin: 14px 0 16px; }
+
+    .about-main p {
+      font-size: 15px;
       color: var(--muted);
-      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 10px;
     }
-    .hero-card {
+
+    .about-side {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .feature-card {
+      background: linear-gradient(145deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 26px;
+      flex: 1;
+    }
+
+    .feature-card.gold-tint {
+      background: linear-gradient(145deg, rgba(200,169,110,0.07), var(--surface));
+      border-color: rgba(200,169,110,0.13);
+    }
+
+    .feature-card h3 { margin: 12px 0 7px; font-size: 18px; }
+    .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      margin-top: 18px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .checklist li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(145deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 22px;
-      min-height: 100%;
-      background:
-        linear-gradient(180deg, rgba(213,179,106,0.07), rgba(255,255,255,0.02)),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      gap: 18px;
+      transition: border-color 0.25s var(--ease);
     }
-    .card-label {
-      font-size: 12px;
-      letter-spacing: 0.15em;
+
+    .testimonial-card:hover { border-color: rgba(200,169,110,0.15); }
+
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 52px;
+      color: var(--gold);
+      opacity: 0.28;
+      line-height: 0.6;
+      margin-bottom: 6px;
+    }
+
+    .quote-text { font-size: 15px; color: var(--text); line-height: 1.8; }
+
+    .quote-author {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 12.5px;
       color: var(--muted);
-      text-transform: uppercase;
     }
-    .route-list {
-      display: grid;
+
+    /* Contact */
+    .contact-inner {
+      background: linear-gradient(145deg, var(--surface-2), var(--surface));
+      border: 1px solid rgba(200,169,110,0.12);
+      border-radius: var(--radius);
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(200,169,110,0.4), transparent);
+    }
+
+    .contact-inner h2 { margin: 14px 0 13px; }
+
+    .contact-inner p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 46ch;
+      margin: 0 auto 30px;
+      line-height: 1.75;
+    }
+
+    .contact-actions {
+      display: flex;
       gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .route-item {
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 30px;
+    }
+
+    .footer-inner {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-      font-size: 15px;
+      flex-wrap: wrap;
     }
-    .route-item:last-child { border-bottom: 0; }
-    .route-item span:last-child { color: var(--muted); }
 
-    section { padding: 28px 0 72px; }
-    .section-head {
+    .footer-copy { font-size: 13px; color: var(--muted); }
+
+    .footer-links { display: flex; gap: 20px; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      transition: color 0.2s var(--ease);
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      h1 { font-size: 46px; }
+      .nav { height: auto; padding: 13px 0; flex-wrap: wrap; gap: 10px; }
+      .nav-links { width: 100%; overflow-x: auto; gap: 18px; }
+      .process-grid { grid-template-columns: 1fr; }
+      .contact-inner { padding: 40px 24px; }
+      .about-main { padding: 26px; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-proof { gap: 24px; }
+      .section { padding: 48px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .container { width: calc(100% - 32px); }
+    }
+
+    /* Address autocomplete */
+    .form-group { position: relative; }
+
+    .addr-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #1c1c22;
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 300;
+      display: none;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+    }
+
+    .addr-option {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      line-height: 1.4;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .addr-option:last-child { border-bottom: none; }
+    .addr-option:hover { background: rgba(200,169,110,0.09); color: var(--gold); }
+
+    .addr-searching {
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--muted);
       display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 22px;
-    }
-    .section-head h2 {
-      margin: 8px 0 0;
-      font-size: clamp(28px, 4vw, 44px);
-      letter-spacing: -0.04em;
-    }
-    .section-head p {
-      margin: 0;
-      max-width: 54ch;
-      color: var(--muted);
+      align-items: center;
+      gap: 8px;
     }
 
-    .service-grid,
-    .testimonial-grid,
-    .process-grid,
-    .contact-grid,
-    .about-grid {
-      display: grid;
-      gap: 20px;
+    .addr-searching::before {
+      content: '';
+      width: 11px;
+      height: 11px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-top-color: var(--gold);
+      border-radius: 999px;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
     }
-    .service-grid { grid-template-columns: repeat(4, 1fr); }
-    .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
-    .process-grid { grid-template-columns: repeat(3, 1fr); }
-    .about-grid { grid-template-columns: 1.1fr 0.9fr; }
-    .contact-grid { grid-template-columns: 1fr 0.9fr; }
 
-    .service-card,
-    .testimonial,
-    .process-card,
-    .contact-card,
-    .section-card {
-      padding: 26px;
-    }
-    .service-card h3,
-    .testimonial h3,
-    .process-card h3,
-    .contact-card h3,
-    .section-card h3 {
-      margin: 18px 0 10px;
-      font-size: 22px;
-      letter-spacing: -0.03em;
-    }
-    .service-card p,
-    .testimonial p,
-    .process-card p,
-    .contact-card p,
-    .section-card p,
-    .section-card li {
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .addr-locate-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 26px;
+      height: 26px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
       color: var(--muted);
-      margin: 0;
-    }
-    .service-icon,
-    .process-number {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
       display: grid;
       place-items: center;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .quote {
-      font-size: 18px;
-      color: var(--text);
-      line-height: 1.7;
-      margin-bottom: 22px;
-    }
-    .author {
-      border-top: 1px solid var(--line);
-      padding-top: 16px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    ul.clean {
-      list-style: none;
+      border-radius: 7px;
       padding: 0;
-      margin: 20px 0 0;
-      display: grid;
-      gap: 14px;
-    }
-    ul.clean li {
-      padding-left: 18px;
-      position: relative;
-    }
-    ul.clean li::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      position: absolute;
-      left: 0;
-      top: 9px;
+      transition: color 0.15s, background 0.15s;
     }
 
-    footer {
-      padding: 22px 0 36px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-    }
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    @media (max-width: 1080px) {
-      .service-grid { grid-template-columns: repeat(2, 1fr); }
-      .testimonial-grid { grid-template-columns: 1fr; }
-      .about-grid, .contact-grid, .hero-grid, .process-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .nav { min-height: auto; padding: 14px 0; flex-wrap: wrap; }
-      .nav-links { width: 100%; overflow-x: auto; padding-bottom: 4px; }
-      .hero-copy, .hero-card, .service-card, .testimonial, .process-card, .contact-card, .section-card { padding: 22px; }
-      .hero-stats, .service-grid { grid-template-columns: 1fr; }
-      .section-head { align-items: start; flex-direction: column; }
-      h1 { max-width: 12ch; }
-    }
+    .addr-locate-btn:hover { color: var(--gold); background: var(--gold-soft); }
+    .addr-locate-btn.spinning { color: var(--gold); pointer-events: none; }
+    .addr-locate-btn.spinning svg { animation: spin 0.75s linear infinite; }
   </style>
 </head>
 <body>
+
   <header>
     <div class="container nav">
       <a href="#top" class="brand">
         <span class="brand-mark">C</span>
         <span>@chauffeurs</span>
       </a>
-      <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
-      <a class="cta" href="#contact">Request a Referral</a>
+      <a class="btn-primary" href="#book">Schedule a Ride</a>
     </div>
   </header>
 
   <main id="top">
+
+    <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
+
         <div class="hero-copy">
-          <span class="pill">Private chauffeur referrals</span>
-          <h1>Reliable rides, matched with the right chauffeur.</h1>
-          <p class="lead">
-            @chauffeurs connects clients with vetted private drivers for airport runs, executive travel,
-            date nights, special events, and full-day transportation. Instead of booking a random ride,
-            you get a referral to a chauffeur who fits the occasion.
+          <span class="badge">Private chauffeur referrals</span>
+          <h1 class="hero-headline">Arrive the way the occasion demands.</h1>
+          <p class="hero-lead">
+            @chauffeurs connects you with vetted private drivers for airport transfers, executive travel,
+            evenings out, and special occasions — a premium alternative to standard rideshare.
           </p>
           <div class="hero-actions">
-            <a class="cta" href="#contact">Get Matched</a>
-            <a class="cta-secondary" href="#services">View Services</a>
+            <a class="btn-primary" href="#book">Schedule a Ride</a>
+            <a class="btn-ghost" href="#services">View Services</a>
           </div>
-          <div class="hero-stats">
-            <div class="stat">
+          <div class="hero-proof">
+            <div class="proof-item">
               <strong>Fast</strong>
-              <span>Quick referral response for upcoming rides</span>
+              <span>Same-day referral response</span>
             </div>
-            <div class="stat">
+            <div class="proof-item">
               <strong>Vetted</strong>
-              <span>Professional chauffeurs for a polished client experience</span>
+              <span>Professional chauffeurs only</span>
             </div>
-            <div class="stat">
-              <strong>Flexible</strong>
-              <span>Airport, corporate, nightlife, and event coverage</span>
+            <div class="proof-item">
+              <strong>Private</strong>
+              <span>No pooled or shared rides</span>
             </div>
           </div>
         </div>
 
-        <aside class="hero-card">
-          <div>
-            <div class="card-label">Popular requests</div>
-            <h3 style="margin: 12px 0 8px; font-size: 32px; letter-spacing: -0.04em;">Referral categories</h3>
-            <p style="color: var(--muted); margin: 0;">
-              Built for clients who want a cleaner, more premium alternative to standard rideshare.
-            </p>
+        <!-- Booking Form -->
+        <div class="booking-card" id="book">
+          <div class="booking-card-header">
+            <span class="badge">Book now</span>
+            <h3>Schedule Your Ride</h3>
+            <p>Tell us about your journey and we'll match you with the right driver.</p>
           </div>
-          <div class="route-list">
-            <div class="route-item"><span>Airport pickup & drop-off</span><span>On-time arrivals</span></div>
-            <div class="route-item"><span>Business meetings</span><span>Professional presentation</span></div>
-            <div class="route-item"><span>Date nights & evenings out</span><span>Stress-free transportation</span></div>
-            <div class="route-item"><span>Weddings & special events</span><span>Coordinated planning</span></div>
-            <div class="route-item"><span>Hourly or full-day requests</span><span>Flexible scheduling</span></div>
-          </div>
-          <a class="cta-secondary" href="#contact">Tell us what you need</a>
-        </aside>
+          <form id="booking-form" novalidate>
+            <div class="form-group">
+              <label for="service">Service Type</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option>Airport Transfer</option>
+                <option>Corporate Travel</option>
+                <option>Evening &amp; Event</option>
+                <option>Wedding &amp; Special Occasion</option>
+                <option>Hourly Hire</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required />
+              </div>
+              <div class="form-group">
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="pickup">Pickup Location</label>
+              <input type="text" id="pickup" name="pickup" placeholder="Address or area" required />
+            </div>
+            <div class="form-group">
+              <label for="dropoff">Destination</label>
+              <input type="text" id="dropoff" name="dropoff" placeholder="Address or area" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Full name" required />
+              </div>
+              <div class="form-group">
+                <label for="contact">Phone / Email</label>
+                <input type="text" id="contact" name="contact" placeholder="How to reach you" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes <span style="opacity:.45;font-size:9px">(optional)</span></label>
+              <textarea id="notes" name="notes" placeholder="Luggage, passengers, special requests…"></textarea>
+            </div>
+            <div class="booking-submit">
+              <button type="submit" class="btn-primary">Request This Booking →</button>
+            </div>
+            <p class="booking-note">We'll confirm availability and match you with a driver within hours.</p>
+          </form>
+        </div>
+
       </div>
     </section>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="pill">Services</span>
-            <h2>Referral options tailored to the ride.</h2>
-          </div>
-          <p>
-            The old filler service boxes are replaced with clear service descriptions that actually fit a chauffeur referral business.
-          </p>
-        </div>
+    <hr class="gold-rule" />
 
-        <div class="service-grid">
-          <article class="service-card">
-            <div class="service-icon">01</div>
+    <!-- Services -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="badge">Services</span>
+          <h2>Every occasion, covered.</h2>
+          <p class="subtitle">Whether it's an early-morning flight or a milestone evening, we match you with a chauffeur suited to the journey.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-icon">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            </div>
             <h3>Airport Transfers</h3>
-            <p>
-              Connect clients with chauffeurs who prioritize punctual pickups, luggage assistance, and smooth airport-to-destination service.
-            </p>
+            <p>Punctual pickups, luggage assistance, and smooth journeys from terminal to destination — without the uncertainty of a rideshare app.</p>
           </article>
-          <article class="service-card">
-            <div class="service-icon">02</div>
-            <h3>Corporate Transportation</h3>
-            <p>
-              Ideal for executives, client meetings, and business travel where professionalism, timing, and presentation matter.
-            </p>
+          <article class="service-card reveal">
+            <div class="service-icon">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            </div>
+            <h3>Corporate Travel</h3>
+            <p>Executive-grade transportation for client meetings, business travel, and corporate dinners where professionalism and timing are non-negotiable.</p>
           </article>
-          <article class="service-card">
-            <div class="service-icon">03</div>
-            <h3>Evenings & Private Events</h3>
-            <p>
-              Date nights, concerts, dinners, and social events with a driver referral that keeps the night seamless from start to finish.
-            </p>
+          <article class="service-card reveal">
+            <div class="service-icon">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3>Evenings &amp; Events</h3>
+            <p>Date nights, restaurants, concerts, and social occasions. Arrive and leave without a single logistical concern.</p>
           </article>
-          <article class="service-card">
-            <div class="service-icon">04</div>
-            <h3>Weddings & Special Occasions</h3>
-            <p>
-              Referrals for milestone events where clients want polished transportation, dependable timing, and a premium arrival experience.
-            </p>
+          <article class="service-card reveal">
+            <div class="service-icon">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Weddings &amp; Milestones</h3>
+            <p>For the moments where every detail counts. Coordinated, polished, and dependable from the first arrival to the final departure.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="how-it-works">
+    <hr class="gold-rule" />
+
+    <!-- How it works -->
+    <section id="how-it-works" class="section">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="pill">How it works</span>
-            <h2>A simple referral flow that feels premium.</h2>
-          </div>
-          <p>
-            Instead of a generic booking form, this explains the actual value of your business: matching people with the right chauffeur.
-          </p>
+        <div class="section-header reveal">
+          <span class="badge">How it works</span>
+          <h2>Simple. Premium. Reliable.</h2>
+          <p class="subtitle">From request to ride in three steps. No algorithms, no guesswork — just the right driver for your journey.</p>
         </div>
         <div class="process-grid">
-          <article class="process-card">
-            <div class="process-number">1</div>
-            <h3>Share the trip details</h3>
-            <p>
-              Pickup, destination, timing, event type, and any preferences that help narrow the right fit.
-            </p>
+          <article class="process-card reveal">
+            <div class="process-num">01</div>
+            <h3>Tell us about the journey</h3>
+            <p>Share the date, time, pickup point, destination, and any preferences that help narrow down the right fit.</p>
           </article>
-          <article class="process-card">
-            <div class="process-number">2</div>
-            <h3>Get a chauffeur referral</h3>
-            <p>
-              You’re matched with a chauffeur suited to the request, whether it’s airport travel, executive service, or a special night out.
-            </p>
+          <article class="process-card reveal">
+            <div class="process-num">02</div>
+            <h3>Receive a tailored referral</h3>
+            <p>We match you with a chauffeur suited to the occasion — whether it's a 5am airport run or a black-tie evening.</p>
           </article>
-          <article class="process-card">
-            <div class="process-number">3</div>
-            <h3>Confirm and ride with confidence</h3>
-            <p>
-              Once the fit looks right, move forward knowing the referral was built around reliability, presentation, and convenience.
-            </p>
+          <article class="process-card reveal">
+            <div class="process-num">03</div>
+            <h3>Ride with confidence</h3>
+            <p>Confirm the booking, then focus entirely on where you're going. Reliability and presentation are already handled.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="about">
+    <hr class="gold-rule" />
+
+    <!-- About -->
+    <section id="about" class="section">
       <div class="container about-grid">
-        <article class="section-card">
-          <span class="pill">About</span>
-          <h2 style="margin: 18px 0 12px; font-size: clamp(28px,4vw,42px); letter-spacing: -0.04em;">A cleaner alternative to generic rides.</h2>
-          <p>
-            @chauffeurs is positioned as a referral-first brand for people who want a more curated transportation experience.
-            The goal is simple: connect clients with dependable chauffeurs for the moments where timing, comfort, and image matter most.
-          </p>
-          <ul class="clean">
-            <li>Built for premium local transportation requests</li>
-            <li>Clearer positioning than a standard rideshare app</li>
-            <li>Strong fit for concierge-style referrals and repeat clients</li>
+        <article class="about-main reveal">
+          <span class="badge">About</span>
+          <h2>A better way to book a private driver.</h2>
+          <p>@chauffeurs was built for clients who expect more than a standard rideshare — people for whom timing, comfort, and a polished experience aren't optional extras.</p>
+          <p>We don't dispatch from a pool of random drivers. We make curated referrals to professional chauffeurs who match the occasion, then step aside so you can focus entirely on where you're going.</p>
+          <ul class="checklist">
+            <li>Purpose-built for premium local transportation</li>
+            <li>Curated referrals, not random dispatch</li>
+            <li>Suited to concierge-style clients and repeat bookings</li>
           </ul>
         </article>
-        <article class="section-card">
-          <span class="pill">Who it serves</span>
-          <h3>Ideal clients</h3>
-          <ul class="clean">
-            <li>Professionals heading to meetings, airports, and corporate dinners</li>
-            <li>Couples planning a night out without driving concerns</li>
-            <li>Event clients who want reliable transportation coordination</li>
-            <li>Anyone who wants a polished, private-driver experience</li>
-          </ul>
-        </article>
+        <div class="about-side">
+          <article class="feature-card reveal">
+            <span class="badge">Ideal for</span>
+            <h3>Who we serve</h3>
+            <ul class="checklist" style="margin-top:12px">
+              <li>Executives and frequent business travellers</li>
+              <li>Couples planning a night out without the drive</li>
+              <li>Event clients needing coordinated transportation</li>
+              <li>Anyone who values a private-driver experience</li>
+            </ul>
+          </article>
+          <article class="feature-card gold-tint reveal">
+            <span class="badge">Ready to book?</span>
+            <h3>Get matched today</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;line-height:1.7">Fill out the booking form above and we'll respond within hours with a driver referral.</p>
+            <a class="btn-primary" href="#book" style="margin-top:16px;display:inline-flex">Schedule a Ride →</a>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="testimonials">
+    <hr class="gold-rule" />
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="pill">Testimonials</span>
-            <h2>Replace filler quotes with believable business-focused proof.</h2>
-          </div>
-          <p>
-            I swapped the stock testimonial style for copy that sounds like actual feedback a referral-based chauffeur brand would want to show.
-          </p>
+        <div class="section-header reveal">
+          <span class="badge">Testimonials</span>
+          <h2>What clients say.</h2>
         </div>
-        <div class="testimonial-grid">
-          <article class="testimonial">
-            <p class="quote">“The referral process was smooth, the driver was professional, and the airport pickup felt far more polished than using a random app.”</p>
-            <div class="author">Frequent traveler · Executive client</div>
+        <div class="testimonials-grid">
+          <article class="testimonial-card reveal">
+            <div>
+              <div class="quote-mark">"</div>
+              <p class="quote-text">The referral process was smooth, the driver was professional, and the airport pickup felt far more polished than anything I'd get from a standard app.</p>
+            </div>
+            <div class="quote-author">Frequent traveller · Executive client</div>
           </article>
-          <article class="testimonial">
-            <p class="quote">“We used @chauffeurs for a dinner and event night, and having a reliable chauffeur lined up made the whole evening easier.”</p>
-            <div class="author">Private client · Special occasion</div>
+          <article class="testimonial-card reveal">
+            <div>
+              <div class="quote-mark">"</div>
+              <p class="quote-text">We used @chauffeurs for a dinner and an event the same evening. Having a reliable driver lined up made the whole night completely effortless.</p>
+            </div>
+            <div class="quote-author">Private client · Special occasion</div>
           </article>
-          <article class="testimonial">
-            <p class="quote">“Exactly the kind of service I’d refer to clients who want dependable transportation without the uncertainty of rideshare.”</p>
-            <div class="author">Concierge-style referral partner</div>
+          <article class="testimonial-card reveal">
+            <div>
+              <div class="quote-mark">"</div>
+              <p class="quote-text">Exactly the kind of service I'd recommend to anyone who wants dependable, professional transportation without the uncertainty of rideshare.</p>
+            </div>
+            <div class="quote-author">Concierge partner · Repeat referrals</div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contact">
-      <div class="container contact-grid">
-        <article class="contact-card">
-          <span class="pill">Contact</span>
-          <h2 style="margin: 18px 0 12px; font-size: clamp(28px,4vw,42px); letter-spacing: -0.04em;">Request a chauffeur referral.</h2>
-          <p>
-            Add your preferred contact method, city/coverage area, and booking instructions here. This section is ready for your real phone number, Instagram, email, or intake form.
-          </p>
-          <div class="hero-actions" style="margin-top: 24px;">
-            <a class="cta" href="mailto:hello@chauffeu.rs">hello@chauffeu.rs</a>
-            <a class="cta-secondary" href="https://instagram.com/chauffeurs" target="_blank" rel="noreferrer">Instagram</a>
+    <hr class="gold-rule" />
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="contact-inner reveal">
+          <span class="badge">Get in touch</span>
+          <h2>Ready when you are.</h2>
+          <p>Use the booking form at the top of the page to schedule a ride, or reach out directly. We respond to all enquiries within hours.</p>
+          <div class="contact-actions">
+            <a class="btn-primary" href="mailto:hello@chauffeu.rs">hello@chauffeu.rs</a>
+            <a class="btn-ghost" href="https://instagram.com/chauffeurs" target="_blank" rel="noreferrer">Instagram</a>
+            <a class="btn-ghost" href="#book">Schedule a Ride</a>
           </div>
-        </article>
-        <article class="contact-card">
-          <span class="pill">Business details</span>
-          <h3>Suggested info to plug in next</h3>
-          <ul class="clean">
-            <li>Primary service area and nearby cities</li>
-            <li>Lead time for airport and event requests</li>
-            <li>Hours of availability</li>
-            <li>Preferred booking or referral intake method</li>
-          </ul>
-        </article>
+        </div>
       </div>
     </section>
+
   </main>
 
   <footer>
-    <div class="container footer-row">
-      <div>© 2026 @chauffeurs. Private chauffeur referrals.</div>
-      <div>
-        <a href="#top">Back to top</a>
+    <div class="container footer-inner">
+      <span class="footer-copy">© 2026 @chauffeurs. Private chauffeur referrals.</span>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="#top">Top ↑</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Set minimum date to today
+    const dateInput = document.getElementById('date');
+    dateInput.min = new Date().toISOString().split('T')[0];
+
+    // Booking form
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const get = id => document.getElementById(id).value.trim();
+      const data = {
+        service: get('service'),
+        date:    get('date'),
+        time:    get('time'),
+        pickup:  get('pickup'),
+        dropoff: get('dropoff'),
+        name:    get('name'),
+        contact: get('contact'),
+        notes:   get('notes'),
+      };
+
+      const required = ['service','date','time','pickup','dropoff','name','contact'];
+      const missing = required.filter(k => !data[k]);
+      if (missing.length) {
+        missing.forEach(k => {
+          const el = document.getElementById(k);
+          el.style.borderColor = 'rgba(210,60,60,0.55)';
+          el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
+        });
+        return;
+      }
+
+      const dateFmt = new Date(data.date + 'T12:00:00').toLocaleDateString('en-GB', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      });
+
+      const [h, m] = data.time.split(':');
+      const hr = parseInt(h, 10);
+      const timeFmt = `${hr > 12 ? hr - 12 : hr || 12}:${m} ${hr >= 12 ? 'PM' : 'AM'}`;
+
+      const subject = encodeURIComponent(`Booking Request — ${data.service} · ${dateFmt}`);
+      const rule = '─'.repeat(40);
+      const row = (label, value) => `  ${label.padEnd(11)}${value}`;
+      const body = encodeURIComponent(
+        `${rule}\n  @CHAUFFEURS — BOOKING REQUEST\n${rule}\n\n` +
+        `${row('Service', data.service)}\n` +
+        `${row('Date', dateFmt)}\n` +
+        `${row('Time', timeFmt)}\n` +
+        `${row('Pickup', data.pickup)}\n` +
+        `${row('Drop-off', data.dropoff)}\n\n` +
+        `${rule}\n  PASSENGER DETAILS\n${rule}\n\n` +
+        `${row('Name', data.name)}\n` +
+        `${row('Contact', data.contact)}\n` +
+        (data.notes ? `\n${rule}\n  NOTES\n${rule}\n\n  ${data.notes}\n` : '') +
+        `\n${rule}`
+      );
+
+      window.location.href = `mailto:hello@chauffeu.rs?subject=${subject}&body=${body}`;
+
+      document.querySelector('.booking-card').innerHTML = `
+        <div class="booking-success">
+          <div class="success-icon">✓</div>
+          <h3>Request Sent</h3>
+          <p>Your email client has opened with the booking details pre-filled.<br>We'll confirm availability and get back to you within hours.</p>
+          <button class="btn-ghost" onclick="location.reload()" style="margin-top:22px">Make another booking</button>
+        </div>
+      `;
+    });
+
+    // Scroll reveal
+    const io = new IntersectionObserver(
+      entries => entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      }),
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Address autocomplete via OpenStreetMap Nominatim (free, no key required)
+    function formatPlace(r) {
+      const a = r.address || {};
+      const parts = [];
+
+      // Named place (airport, hotel, station, etc.)
+      const named = r.name;
+      const isNamedPOI = named && !a.house_number;
+      if (isNamedPOI) parts.push(named);
+
+      // Street address
+      if (a.house_number && a.road) parts.push(`${a.house_number} ${a.road}`);
+      else if (a.road) parts.push(a.road);
+
+      // Suburb / neighbourhood
+      const sub = a.suburb || a.neighbourhood || a.quarter || a.city_district;
+      if (sub) parts.push(sub);
+
+      // City / town
+      const city = a.city || a.town || a.village || a.municipality;
+      if (city && city !== sub) parts.push(city);
+
+      // State
+      if (a.state) parts.push(a.state);
+
+      // Postcode
+      if (a.postcode) parts.push(a.postcode);
+
+      return parts.filter(Boolean).join(', ') || r.display_name;
+    }
+
+    const CROSSHAIR_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>`;
+
+    function setupAutocomplete(inputId) {
+      const input = document.getElementById(inputId);
+
+      // Wrap input so button + dropdown can be positioned relative to it
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:relative;';
+      input.parentNode.insertBefore(wrap, input);
+      wrap.appendChild(input);
+      input.style.paddingRight = '40px';
+
+      // Geolocation button inside the input
+      const locateBtn = document.createElement('button');
+      locateBtn.type = 'button';
+      locateBtn.className = 'addr-locate-btn';
+      locateBtn.title = 'Use my current location';
+      locateBtn.innerHTML = CROSSHAIR_ICON;
+      wrap.appendChild(locateBtn);
+
+      // Autocomplete dropdown
+      const dropdown = document.createElement('div');
+      dropdown.className = 'addr-dropdown';
+      wrap.appendChild(dropdown);
+
+      // --- Geolocation ---
+      locateBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+          input.placeholder = 'Geolocation not supported — please type an address';
+          return;
+        }
+        locateBtn.classList.add('spinning');
+        navigator.geolocation.getCurrentPosition(
+          async ({ coords }) => {
+            try {
+              const res = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?lat=${coords.latitude}&lon=${coords.longitude}&format=json&addressdetails=1`
+              );
+              const result = await res.json();
+              input.value = formatPlace(result);
+              input.style.borderColor = '';
+              dropdown.style.display = 'none';
+            } catch {
+              input.placeholder = 'Could not get address — please type it';
+            }
+            locateBtn.classList.remove('spinning');
+            locateBtn.innerHTML = CROSSHAIR_ICON;
+          },
+          (err) => {
+            locateBtn.classList.remove('spinning');
+            locateBtn.innerHTML = CROSSHAIR_ICON;
+            if (err.code === 1) {
+              input.placeholder = 'Location access denied — please type an address';
+              setTimeout(() => { input.placeholder = ''; }, 4000);
+            }
+          },
+          { timeout: 10000, maximumAge: 60000 }
+        );
+      });
+
+      // --- Search as you type ---
+      let timer, controller;
+
+      input.addEventListener('input', () => {
+        clearTimeout(timer);
+        const q = input.value.trim();
+        if (q.length < 3) { dropdown.style.display = 'none'; return; }
+
+        dropdown.innerHTML = '<div class="addr-searching">Searching addresses…</div>';
+        dropdown.style.display = 'block';
+
+        timer = setTimeout(async () => {
+          if (controller) controller.abort();
+          controller = new AbortController();
+          try {
+            const res = await fetch(
+              `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=6&addressdetails=1`,
+              { signal: controller.signal }
+            );
+            const results = await res.json();
+            if (!results.length) { dropdown.style.display = 'none'; return; }
+            dropdown.innerHTML = '';
+            results.forEach(r => {
+              const label = formatPlace(r);
+              const opt = document.createElement('div');
+              opt.className = 'addr-option';
+              opt.textContent = label;
+              opt.addEventListener('mousedown', e => {
+                e.preventDefault();
+                input.value = label;
+                input.style.borderColor = '';
+                dropdown.style.display = 'none';
+              });
+              dropdown.appendChild(opt);
+            });
+            dropdown.style.display = 'block';
+          } catch (err) {
+            if (err.name !== 'AbortError') dropdown.style.display = 'none';
+          }
+        }, 380);
+      });
+
+      input.addEventListener('blur', () => {
+        setTimeout(() => { dropdown.style.display = 'none'; }, 160);
+      });
+
+      input.addEventListener('focus', () => {
+        if (dropdown.children.length && input.value.trim().length >= 3) {
+          dropdown.style.display = 'block';
+        }
+      });
+    }
+
+    setupAutocomplete('pickup');
+    setupAutocomplete('dropoff');
+  </script>
 </body>
 </html>
